@@ -1,13 +1,13 @@
 let config =  {
   type: Phaser.AUTO,
   parent: 'phaser-example',
-  width: 800,
-  height: 600,
+  width: 10000,
+  height: 450,
   physics: {
         default: 'arcade',
         arcade: {
-            debug: false,
-            gravity: {y: 300}
+            debug: true,
+            gravity: {y: 500} //TODO: turn on for player, but not for bullets
         }
     },
   scene:[Stage1, Story1]
