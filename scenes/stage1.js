@@ -1,3 +1,6 @@
+//hey idiot, remember shift+alt+a comments out blocks
+
+
 class Stage1 extends Phaser.Scene {
   constructor () {
     super('Stage1');
@@ -51,16 +54,20 @@ create () {
     this.badguy.body.setAllowGravity(true)
     this.badguy.body.setCollideWorldBounds(true);
     this.badguy.setVelocityX(-100);
+
     this.player = this.physics.add.sprite(100, 175, 'mainchar');
     this.player.body.setAllowGravity(true)
     this.player.setCollideWorldBounds(true);
+
     this.physics.add.collider(this.player, this.layer);
     this.physics.add.collider(this.badguy, this.layer);
+
     this.pleasedieblock = this.map.filterTiles(function(tile){
       return (tile.index === 35);
     });
-    this.cameras.main.startFollow(this.player); 
-    
+    this.cameras.main.startFollow(this.player);
+
+    //putting second bg create here doesn't work
 
     this.anims.create({
     key: 'left',
@@ -71,7 +78,7 @@ create () {
     this.anims.create({
       key: 'right',
       frames: this.anims.generateFrameNumbers('mainchar', {start: 2, end: 9}),
-      framerate: 10,
+      framerate: 15,
       repeat: -1
     })
     this.cursors = this.input.keyboard.createCursorKeys(); 
@@ -92,21 +99,21 @@ create () {
     this.anims.create({
       key: 'bgleft',
       frames: this.anims.generateFrameNumbers('badguy', {start: 7, end: 12}),
-      framerate: 10,
+      framerate: 1,
       repeat: -1
     })
 
     this.anims.create({
       key: 'bgright',
       frames: this.anims.generateFrameNumbers('badguy', {start: 1, end: 6}),
-      framerate: 10,
+      framerate: 1,
       repeat: -1
     })
 
     this.anims.create({
       key: 'bgstop',
       frames: this.anims.generateFrameNumbers('badguy', {start: 0, end: 0}),
-      framerate: 10,
+      framerate: 1,
       repeat: -1
   
     })
@@ -122,14 +129,24 @@ create () {
   this.ammo = 6 //ammo count var
   this.ammoText = this.add.text(this.player.x - 25, this.player.y + 25, 'ammo:' + this.ammo, {fontsize: '32px', fill: '#000000' }); //Remember, the score text is in black
 
+  
 }
+
+/* badguySummon(badguy, bgx, bgy, bggravity, bgcollide, bgvelocity) {
+  this.badguy = this.physics.add.sprite(this.bgx, this.bgy, 'badguy');
+  this.bgx = 600;
+  this.bgy = 175;
+  this.badguy.body.setAllowGravity(true);
+  this.badguy.body.setCollideWorldBounds(true);
+  this.badguy.setVelocityX(-100);
+} */
 playerDie(){
   this.player.x = 100;
   this.player.y = 175;
   this.badguystatus = 1;
   this.badguyhealth = 6;
   this.badguy.setFrame(0);
-  
+  //this.physics.add.existing(new 'badguy'(this, 600, 175));
 
 }
 reload (r) {
@@ -140,6 +157,8 @@ reload (r) {
   );
   }
 }
+
+
 
  shoot (space) {
    //this.basicbullet = this.physics.add.sprite(100, 450, 'basicbullet');
@@ -237,17 +256,22 @@ reload (r) {
       this.physics.add.overlap(this.player, this.badguy, this.playerDie, null, this);
    }
   
+  // if (this.player.x > 600){
+    //this.bg1 = new badguySummon(this.physics.add.sprite(this.bgx, this.bgy, 'badguy'), 600, 175, this, this, this);
+  // }
+
+ 
     
     this.physics.add.overlap(this.basicbullet, this.badguy, this.bghealthminus, null, this);
     this.physics.world.overlapTiles(this.player, this.pleasedieblock, this.playerDie, null, this);
 
 
-if (this.badguystatus === 1){
+/* if (this.badguystatus === 1){
     if (this.badguy.x < 450) {this.badguy.setVelocityX(100), this.badguy.anims.play('bgright', true);
   }
     else if (this.badguy.x > 750) {this.badguy.setVelocityX(-100), this.badguy.anims.play('bgleft', true);
   }
-    }
+    } */
    /*  else {
       //this.badguy.setVelocityX(0);
     } */
