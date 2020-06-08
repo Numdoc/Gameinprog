@@ -266,14 +266,14 @@ reload (r) {
     this.physics.world.overlapTiles(this.player, this.pleasedieblock, this.playerDie, null, this);
 
 
-/* if (this.badguystatus === 1){
+if (this.badguystatus === 1){
     if (this.badguy.x < 450) {this.badguy.setVelocityX(100), this.badguy.anims.play('bgright', true);
   }
     else if (this.badguy.x > 750) {this.badguy.setVelocityX(-100), this.badguy.anims.play('bgleft', true);
   }
-    } */
-   /*  else {
-      //this.badguy.setVelocityX(0);
-    } */
+    } 
+    else {
+      this.badguy.setVelocityX(0);
+    }
   }
 };  
