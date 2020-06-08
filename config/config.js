@@ -6,7 +6,7 @@ let config =  {
   physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            debug: false,
             gravity: {y: 500} //TODO: turn on for player, but not for bullets
         }
     },
